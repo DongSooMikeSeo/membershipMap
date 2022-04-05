@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+   <script src="statesData.geojson" type="text/javascript"></script>
+
+    </head>
+<body>
+
+
+    <div id="map" style="height: 100vh; width: 100%;"> </div>
+
+    <script>
+    var mapboxAccessToken = 'pk.eyJ1IjoiZmlyZWRpcmVjdGlvbiIsImEiOiJjanhwZDlndXQwZ2lkM2VwNHIzZGpzMGpjIn0.a9d87Xax3Me_0SdEj8eAeQ';
+    var map = L.map('map').setView([37.8, -96], 4);
+    
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
+        id: 'mapbox/light-v9',
+        // attribution: ...,
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(map);
+    
+    L.geojson(statesData).addTo(map)
+
+    </script>
+
+
+    
+</body>
+</html>
