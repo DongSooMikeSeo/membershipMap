@@ -28,8 +28,22 @@
         zoomOffset: -1
     }).addTo(map);
     
+    function style() {
+    return {
+        fillColor: '#800026',
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+
+
+
     var statesLayer = L.geoJSON(null, {
-            // style: style,
+            style: style,
             // onEachFeature: onEachFeature
 
         }).addTo(map);
