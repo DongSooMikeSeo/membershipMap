@@ -84,18 +84,23 @@
 // var api_key = 'AIzaSyDpkFYEu7PUJbZ3Hk9_b9iVcmbHbrsr4os';
 
 
-var locations = fetch(
-  "https://opensheet.elk.sh/1vc3oCn0__lUodoZR2oydmTQ90k6dkHorYBVitrVuYeM/Sheet1"
-)
-  .then((res) => res.json());
+// var locations = fetch(
+//   "https://opensheet.elk.sh/1vc3oCn0__lUodoZR2oydmTQ90k6dkHorYBVitrVuYeM/Sheet1"
+// ).then((res) => res.json());
+
+
+
+var locations = [
+  ["LOCATION_1", 33.6799635, -84.4439155],
+  ["LOCATION_2", 57.05203942, -135.3295748],
+  ["LOCATION_3", 31.55341553, -110.3002597],
+];
 
 for (var i = 0; i < locations.length; i++) {
-  marker = new L.marker([locations[i][3], locations[i][4]])
+  marker = new L.marker([locations[i][1], locations[i][2]])
     .bindPopup(locations[i][0])
     .addTo(map);
 };
-
-
 
 // var url = 'https://sheets.googleapis.com/v4/spreadsheets/' +
 //            spreadsheet_id + '/values/' + tab_name +
