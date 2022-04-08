@@ -71,8 +71,9 @@ async function main (){
         return [row.Name, row.Link, row.X, row.Y];
     });
 for (var i = 0; i < locations.length; i++) {
-  marker = new L.marker([locations[i][2], locations[i][3]])
-    .bindPopup(locations[i][0])
+    popupText = '<a href="'+ locations[i][1]+ '">'+locations[i][0]+'</a>'
+    marker = new L.marker([locations[i][2], locations[i][3]])
+    .bindPopup(popupText)
     .addTo(map);
 };
 }
