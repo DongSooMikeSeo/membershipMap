@@ -79,9 +79,7 @@
 //     .addTo(map);
 // }
 
-// var spreadsheet_id = '1vc3oCn0__lUodoZR2oydmTQ90k6dkHorYBVitrVuYeM';
-// var tab_name = 'Sheet1';
-// var api_key = 'AIzaSyDpkFYEu7PUJbZ3Hk9_b9iVcmbHbrsr4os';
+
 
 
 // var locations = fetch(
@@ -107,14 +105,24 @@ for (var i = 0; i < locations.length; i++) {
 
 main();
 
-// var url = 'https://sheets.googleapis.com/v4/spreadsheets/' +
-//            spreadsheet_id + '/values/' + tab_name +
-//            '?alt=json&key=' + api_key;
-// ($.getJSON(url, 'callback=?')).success(function(data) {
-//     console.log(data)
-// }));
+var spreadsheet_id = '1vc3oCn0__lUodoZR2oydmTQ90k6dkHorYBVitrVuYeM';
+var tab_name = 'Sheet1';
+var api_key = 'AIzaSyDpkFYEu7PUJbZ3Hk9_b9iVcmbHbrsr4os';
 
-
+var url = 'https://sheets.googleapis.com/v4/spreadsheets/' +
+           spreadsheet_id + '/values/' + tab_name +
+           '?alt=json&key=' + api_key;
+async function main2(){
+    const response2 = await fetch(url);
+    const json2 = await response2.json();
+    const locations = json.map((row) => {
+        return [row.Name, row.Link, row.X, row.Y];
+    });
+    for (var i = 0; i < locations.length; i++) {
+  console.log(locationsp[i]);
+    }
+}
+main2()
     </script>
 
 
