@@ -9,6 +9,15 @@
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
 
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+  
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+  
+
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <link rel="shortcut icon" href="#" />
     </head>
@@ -23,7 +32,7 @@
  opensheet = '<a href="https://benborgers.com/posts/google-sheets-json">opensheet</a>';
 
     var mapboxAccessToken = 'pk.eyJ1IjoiZmlyZWRpcmVjdGlvbiIsImEiOiJjanhwZDlndXQwZ2lkM2VwNHIzZGpzMGpjIn0.a9d87Xax3Me_0SdEj8eAeQ';
-    var map = L.map('map').setView([37.8, -96], 4);
+    var map = L.map('map').setView([37.8, -96], 5.4);
     
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
         id: 'mapbox/light-v9',
@@ -39,7 +48,7 @@
         opacity: 1,
         color: 'white',
         dashArray: '3',
-        fillOpacity: 0.7
+        fillOpacity: 0.3
     };
 }
 
@@ -70,12 +79,16 @@ async function main (){
     const locations = json.map((row) => {
         return [row.Name, row.Link, row.X, row.Y];
     });
+
+    let markers = L.markerClusterGroup();
+
 for (var i = 0; i < locations.length; i++) {
     popupText = '<a href="'+ locations[i][1]+ '">'+locations[i][0]+'</a>'
     marker = new L.marker([locations[i][2], locations[i][3]])
-    .bindPopup(popupText)
-    .addTo(map);
+    .bindPopup(popupText);
+    markers.addLayer(marker);
 };
+map.addLayer(markers);
 }
 
 main();
