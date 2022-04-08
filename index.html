@@ -71,9 +71,8 @@ async function main (){
         return [row.Name, row.Link, row.X, row.Y];
     });
 for (var i = 0; i < locations.length; i++) {
-  popupText = <a href='https://benborgers.com/posts/google-sheets-json'>locations[i][0]</a>
   marker = new L.marker([locations[i][2], locations[i][3]])
-    .bindPopup(popupText)
+    .bindPopup(<a href='https://benborgers.com/posts/google-sheets-json'>locations[i][0]</a>)
     .addTo(map);
 };
 }
