@@ -72,7 +72,7 @@ async function main (){
     });
 for (var i = 0; i < locations.length; i++) {
   marker = new L.marker([locations[i][2], locations[i][3]])
-    .bindPopup(<a href='https://benborgers.com/posts/google-sheets-json'>locations[i][0]</a>)
+    .bindPopup(locations[i][0])
     .addTo(map);
 };
 }
