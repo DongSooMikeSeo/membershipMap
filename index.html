@@ -18,12 +18,16 @@
     <div id="map" style="height: 100vh; width: 100%;"> </div>
 
     <script>
+
+
+ opensheet = '<a href="https://benborgers.com/posts/google-sheets-json">opensheet</a>';
+
     var mapboxAccessToken = 'pk.eyJ1IjoiZmlyZWRpcmVjdGlvbiIsImEiOiJjanhwZDlndXQwZ2lkM2VwNHIzZGpzMGpjIn0.a9d87Xax3Me_0SdEj8eAeQ';
     var map = L.map('map').setView([37.8, -96], 4);
     
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=' + mapboxAccessToken, {
         id: 'mapbox/light-v9',
-        // attribution: ...,
+        attribution: opensheet + ' contributors',
         tileSize: 512,
         zoomOffset: -1
     }).addTo(map);
@@ -56,35 +60,8 @@
 
 });
 
-// var locations = [
-//   ["LOCATION_1", 11.8166, 122.0942],
-//   ["LOCATION_2", 11.9804, 121.9189],
-//   ["LOCATION_3", 10.7202, 122.5621],
-//   ["LOCATION_4", 11.3889, 122.6277],
-//   ["LOCATION_5", 10.5929, 122.6325]
-// ];
-
-// var map = L.map('map').setView([11.206051, 122.447886], 8);
-// mapLink =
-//   '<a href="http://openstreetmap.org">OpenStreetMap</a>';
-// L.tileLayer(
-//   'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; ' + mapLink + ' Contributors',
-//     maxZoom: 18,
-//   }).addTo(map);
-
-// for (var i = 0; i < locations.length; i++) {
-//   marker = new L.marker([locations[i][1], locations[i][2]])
-//     .bindPopup(locations[i][0])
-//     .addTo(map);
-// }
 
 
-
-
-// var locations = fetch(
-//   "https://opensheet.elk.sh/1vc3oCn0__lUodoZR2oydmTQ90k6dkHorYBVitrVuYeM/Sheet1"
-// ).then((res) => res.json());
 
 
 async function main (){ 
@@ -105,24 +82,7 @@ for (var i = 0; i < locations.length; i++) {
 
 main();
 
-var spreadsheet_id = '1vc3oCn0__lUodoZR2oydmTQ90k6dkHorYBVitrVuYeM';
-var tab_name = 'Sheet1';
-var api_key = 'AIzaSyDpkFYEu7PUJbZ3Hk9_b9iVcmbHbrsr4os';
 
-var url = 'https://sheets.googleapis.com/v4/spreadsheets/' +
-           spreadsheet_id + '/values/' + tab_name +
-           '?alt=json&key=' + api_key;
-async function main2(){
-    const response2 = await fetch(url);
-    const json2 = await response2.json();
-    const locations = json2.map((row) => {
-        return [row.Name, row.Link, row.X, row.Y];
-    });
-    for (var i = 0; i < locations.length; i++) {
-  console.log(locationsp[i]);
-    }
-}
-main2()
     </script>
 
 
