@@ -115,7 +115,7 @@ var url = 'https://sheets.googleapis.com/v4/spreadsheets/' +
 async function main2(){
     const response2 = await fetch(url);
     const json2 = await response2.json();
-    const locations = json.map((row) => {
+    const locations = json2.map((row) => {
         return [row.Name, row.Link, row.X, row.Y];
     });
     for (var i = 0; i < locations.length; i++) {
