@@ -76,8 +76,8 @@ async function main (){
  );
     const json = await response.json();
 
-    const locations = json.map((row) => {
-        return [row.Name, row.Link, row.X, row.Y];
+    const locations = json.filter( x =>x.coopType =="producer").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
     });
 
     let markers = L.markerClusterGroup();
@@ -87,12 +87,78 @@ for (var i = 0; i < locations.length; i++) {
     marker = new L.marker([locations[i][2], locations[i][3]])
     .bindPopup(popupText);
     markers.addLayer(marker);
+
+   
 };
 map.addLayer(markers);
+
+// const workercoopLocations =json.filter( x =>x.coopType =="worker").map((row) => {
+//         return [row.Name, row.Link, row.X, row.Y,row.coopType];
+//     });
+
+ 
+
 }
 
 main();
 
+
+//https://stackoverflow.com/questions/2722159/how-to-filter-object-array-based-on-attributes
+
+// <div class="btn-group">
+//         <button type="button" id="allbus" class="btn btn-success">All</button>
+//         <button type="button" id="others" class="btn btn-primary">Others</button>
+//         <button type="button" id="cafes" class="btn btn-danger">Cafes</button>
+//     </div>
+
+
+// var promise = $.getJSON("businesses.json");
+//     promise.then(function(data) {
+//         var allbusinesses = L.geoJson(data);
+//                 var cafes = L.geoJson(data, {
+//             filter: function(feature, layer) {
+//                 return feature.properties.BusType == "Cafe";
+//             },
+//             pointToLayer: function(feature, latlng) {
+//                 return L.marker(latlng, {
+//                     icon: cafeIcon
+//                 }).on('mouseover', function() {
+//                     this.bindPopup(feature.properties.Name).openPopup();
+//                 });
+//             }
+//         });
+//         var others = L.geoJson(data, {
+//             filter: function(feature, layer) {
+//                 return feature.properties.BusType != "Cafe";
+//             },
+//             pointToLayer: function(feature, latlng) {
+//                 return L.marker(latlng, {
+//                 }).on('mouseover', function() {
+//                     this.bindPopup(feature.properties.Name).openPopup();
+//                 });
+//             }
+//         });
+//         map.fitBounds(allbusinesses.getBounds(), {
+//             padding: [50, 50]
+//         });
+//         cafes.addTo(map)
+//         others.addTo(map)
+//         // The JavaScript below is new
+//         $("#others").click(function() {
+//             map.addLayer(others)
+//             map.removeLayer(cafes)
+//         });
+//         $("#cafes").click(function() {
+//             map.addLayer(cafes)
+//             map.removeLayer(others)
+//         });
+//         $("#allbus").click(function() {
+//             map.addLayer(cafes)
+//             map.addLayer(others)
+//         });
+//     });
+
+// //http://bl.ocks.org/zross/47760925fcb1643b4225
 
     </script>
 
