@@ -20,9 +20,32 @@
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <link rel="shortcut icon" href="#" />
-    </head>
-<body>
 
+   <!-- bootstrap -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+   
+   <style type="text/css">
+
+    button {
+        width: 100px;
+    }
+    </style>
+
+
+
+    </head>
+
+
+
+
+
+
+<body>
+    <div class="btn-group">
+        <button type="button" id="all" class="btn btn-success">All</button>
+        <button type="button" id="worker" class="btn btn-primary">Worker Coop</button>
+        <button type="button" id="housing" class="btn btn-danger">Housing Coop</button>
+    </div>
 
     <div id="map" style="height: 100vh; width: 100%;"> </div>
 
@@ -76,40 +99,84 @@ async function main (){
  );
     const json = await response.json();
 
-    const locations = json.filter( x =>x.coopType =="producer").map((row) => {
+    // all location
+    const alllocations = json.map((row) => {
         return [row.Name, row.Link, row.X, row.Y,row.coopType];
     });
 
-    let markers = L.markerClusterGroup();
+    let allmarkers = L.markerClusterGroup();
 
-for (var i = 0; i < locations.length; i++) {
-    popupText = '<a href="'+ locations[i][1]+ '">'+locations[i][0]+'</a>'
-    marker = new L.marker([locations[i][2], locations[i][3]])
+for (var i = 0; i < alllocations.length; i++) {
+    popupText = '<a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a>'
+    allmarker = new L.marker([alllocations[i][2], alllocations[i][3]])
     .bindPopup(popupText);
-    markers.addLayer(marker);
-
-   
+    allmarkers.addLayer(allmarker);   
 };
-map.addLayer(markers);
 
-// const workercoopLocations =json.filter( x =>x.coopType =="worker").map((row) => {
-//         return [row.Name, row.Link, row.X, row.Y,row.coopType];
-//     });
+// worker location
 
- 
+const workerlocations = json.filter( x =>x.coopType =="worker").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let workermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < workerlocations.length; i++) {
+    popupText = '<a href="'+ workerlocations[i][1]+ '">'+workerlocations[i][0]+'</a>'
+    workermarker = new L.marker([workerlocations[i][2], workerlocations[i][3]])
+    .bindPopup(popupText);
+    workermarkers.addLayer(workermarker);
+};
+
+//housing location
+
+const housinglocations = json.filter( x =>x.coopType =="housing").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let housingmarkers = L.markerClusterGroup();
+
+for (var i = 0; i < housinglocations.length; i++) {
+    popupText = '<a href="'+ housinglocations[i][1]+ '">'+housinglocations[i][0]+'</a>'
+    housingmarker = new L.marker([housinglocations[i][2], housinglocations[i][3]])
+    .bindPopup(popupText);
+    housingmarkers.addLayer(housingmarker);
+};
+
+
+
+
+map.addLayer(allmarkers);
+
+$("#all").click(function() {
+             map.addLayer(allmarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(workermarkers)
+         });
+         $("#worker").click(function() {
+            map.addLayer(workermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#housing").click(function() {
+            map.addLayer(housingmarkers)
+             map.removeLayer(allmarkers)
+             map.removeLayer(workermarkers)
+         });
+
+
 
 }
 
 main();
 
 
+
+
+
 //https://stackoverflow.com/questions/2722159/how-to-filter-object-array-based-on-attributes
 
-// <div class="btn-group">
-//         <button type="button" id="allbus" class="btn btn-success">All</button>
-//         <button type="button" id="others" class="btn btn-primary">Others</button>
-//         <button type="button" id="cafes" class="btn btn-danger">Cafes</button>
-//     </div>
+
 
 
 // var promise = $.getJSON("businesses.json");
@@ -143,20 +210,11 @@ main();
 //         });
 //         cafes.addTo(map)
 //         others.addTo(map)
+
+
+
 //         // The JavaScript below is new
-//         $("#others").click(function() {
-//             map.addLayer(others)
-//             map.removeLayer(cafes)
-//         });
-//         $("#cafes").click(function() {
-//             map.addLayer(cafes)
-//             map.removeLayer(others)
-//         });
-//         $("#allbus").click(function() {
-//             map.addLayer(cafes)
-//             map.addLayer(others)
-//         });
-//     });
+
 
 // //http://bl.ocks.org/zross/47760925fcb1643b4225
 
