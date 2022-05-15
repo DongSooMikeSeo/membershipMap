@@ -107,13 +107,13 @@ async function main (){
 
     // all location
     const alllocations = json.map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let allmarkers = L.markerClusterGroup();
 
 for (var i = 0; i < alllocations.length; i++) {
-    popupText = '<a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a>'
+    popupText = '<dl><dt><a href="'+ alllocations[i][1]+ '">'+alllocations[i][0]+'</a></dt>'+'<dd>'+alllocations[i][5]+'</dd></dl>'
     allmarker = new L.marker([alllocations[i][2], alllocations[i][3]])
     .bindPopup(popupText);
     allmarkers.addLayer(allmarker);   
@@ -179,50 +179,6 @@ main();
 
 
 
-
-//https://stackoverflow.com/questions/2722159/how-to-filter-object-array-based-on-attributes
-
-
-
-
-// var promise = $.getJSON("businesses.json");
-//     promise.then(function(data) {
-//         var allbusinesses = L.geoJson(data);
-//                 var cafes = L.geoJson(data, {
-//             filter: function(feature, layer) {
-//                 return feature.properties.BusType == "Cafe";
-//             },
-//             pointToLayer: function(feature, latlng) {
-//                 return L.marker(latlng, {
-//                     icon: cafeIcon
-//                 }).on('mouseover', function() {
-//                     this.bindPopup(feature.properties.Name).openPopup();
-//                 });
-//             }
-//         });
-//         var others = L.geoJson(data, {
-//             filter: function(feature, layer) {
-//                 return feature.properties.BusType != "Cafe";
-//             },
-//             pointToLayer: function(feature, latlng) {
-//                 return L.marker(latlng, {
-//                 }).on('mouseover', function() {
-//                     this.bindPopup(feature.properties.Name).openPopup();
-//                 });
-//             }
-//         });
-//         map.fitBounds(allbusinesses.getBounds(), {
-//             padding: [50, 50]
-//         });
-//         cafes.addTo(map)
-//         others.addTo(map)
-
-
-
-//         // The JavaScript below is new
-
-
-// //http://bl.ocks.org/zross/47760925fcb1643b4225
 
     </script>
 
