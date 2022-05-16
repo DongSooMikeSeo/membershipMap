@@ -44,13 +44,13 @@
     <div class="btn-group">
         <button type="button" id="all" class="btn btn-primary">All</button>
         <button type="button" id="worker" class="btn btn-info">Worker Coop</button>
+        <button type="button" id="consumer" class="btn btn-info">Consumer Coop</button>
+        <button type="button" id="producer" class="btn btn-info">Producer Coop</button>
+        <button type="button" id="other" class="btn btn-info">Other Coop</button>
         <button type="button" id="housing" class="btn btn-info">Housing Coop</button>
-        <button type="button" id="housing" class="btn btn-info">Consumer Coop</button>
-        <button type="button" id="housing" class="btn btn-info">Producer Coop</button>
-        <button type="button" id="housing" class="btn btn-info">Land Coop</button>
-        <button type="button" id="housing" class="btn btn-info">Business Coop</button>
-        <button type="button" id="housing" class="btn btn-info">Secondary Coop</button>
-        <button type="button" id="housing" class="btn btn-info">Other Coop</button>
+        <button type="button" id="secondary" class="btn btn-info">Secondary Coop</button>
+        <button type="button" id="land" class="btn btn-info">Land Coop</button>
+        <button type="button" id="business" class="btn btn-info">Business Coop</button>
     </div>
 
     <div id="map" style="height: 100vh; width: 100%;"> </div>
@@ -121,32 +121,124 @@ for (var i = 0; i < alllocations.length; i++) {
 
 // worker location
 
-const workerlocations = json.filter( x =>x.coopType =="worker").map((row) => {
+const workerlocations = json.filter( x =>x.coopType =="Worker").map((row) => {
         return [row.Name, row.Link, row.X, row.Y,row.coopType];
     });
 
     let workermarkers = L.markerClusterGroup();
 
 for (var i = 0; i < workerlocations.length; i++) {
-    popupText = '<a href="'+ workerlocations[i][1]+ '">'+workerlocations[i][0]+'</a>'
+    popupText = '<dl><dt><a href="'+ workerlocations[i][1]+ '">'+workerlocations[i][0]+'</a></dt>'+'<dd>'+workerlocations[i][5]+'</dd></dl>'
     workermarker = new L.marker([workerlocations[i][2], workerlocations[i][3]])
     .bindPopup(popupText);
     workermarkers.addLayer(workermarker);
 };
 
+//Consumer location
+
+const consumerlocations = json.filter( x =>x.coopType =="Consumer").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let consumermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < consumerlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ consumerlocations[i][1]+ '">'+consumerlocations[i][0]+'</a></dt>'+'<dd>'+consumerlocations[i][5]+'</dd></dl>'
+    consumermarker = new L.marker([consumerlocations[i][2], consumerlocations[i][3]])
+    .bindPopup(popupText);
+    consumermarkers.addLayer(consumermarker);
+};
+
+//Producer location
+
+const producerlocations = json.filter( x =>x.coopType =="Producer").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let producermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < producerlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ producerlocations[i][1]+ '">'+producerlocations[i][0]+'</a></dt>'+'<dd>'+producerlocations[i][5]+'</dd></dl>'
+    producermarker = new L.marker([producerlocations[i][2], producerlocations[i][3]])
+    .bindPopup(popupText);
+    producermarkers.addLayer(producermarker);
+};
+
+//Other location
+
+const otherlocations = json.filter( x =>x.coopType =="Other").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let othermarkers = L.markerClusterGroup();
+
+for (var i = 0; i < otherlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ otherlocations[i][1]+ '">'+otherlocations[i][0]+'</a></dt>'+'<dd>'+otherlocations[i][5]+'</dd></dl>'
+    othermarker = new L.marker([otherlocations[i][2], otherlocations[i][3]])
+    .bindPopup(popupText);
+    othermarkers.addLayer(othermarker);
+};
+
+
+
 //housing location
 
-const housinglocations = json.filter( x =>x.coopType =="housing").map((row) => {
+const housinglocations = json.filter( x =>x.coopType =="Housing").map((row) => {
         return [row.Name, row.Link, row.X, row.Y,row.coopType];
     });
 
     let housingmarkers = L.markerClusterGroup();
 
 for (var i = 0; i < housinglocations.length; i++) {
-    popupText = '<a href="'+ housinglocations[i][1]+ '">'+housinglocations[i][0]+'</a>'
+    popupText = '<dl><dt><a href="'+ housinglocations[i][1]+ '">'+housinglocations[i][0]+'</a></dt>'+'<dd>'+housinglocations[i][5]+'</dd></dl>'
     housingmarker = new L.marker([housinglocations[i][2], housinglocations[i][3]])
     .bindPopup(popupText);
     housingmarkers.addLayer(housingmarker);
+};
+
+//Secondary location
+
+const secondarylocations = json.filter( x =>x.coopType =="Secondary").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let secondarymarkers = L.markerClusterGroup();
+
+for (var i = 0; i < secondarylocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ secondarylocations[i][1]+ '">'+secondarylocations[i][0]+'</a></dt>'+'<dd>'+secondarylocations[i][5]+'</dd></dl>'
+    secondarymarker = new L.marker([secondarylocations[i][2], secondarylocations[i][3]])
+    .bindPopup(popupText);
+    secondarymarkers.addLayer(secondarymarker);
+};
+
+//Land location
+
+const landlocations = json.filter( x =>x.coopType =="Land").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let landmarkers = L.markerClusterGroup();
+
+for (var i = 0; i < landlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ landlocations[i][1]+ '">'+landlocations[i][0]+'</a></dt>'+'<dd>'+landlocations[i][5]+'</dd></dl>'
+    landmarker = new L.marker([landlocations[i][2], landlocations[i][3]])
+    .bindPopup(popupText);
+    landmarkers.addLayer(landmarker);
+};
+
+//Business location
+
+const businesslocations = json.filter( x =>x.coopType =="Business").map((row) => {
+        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+    });
+
+    let businessmarkers = L.markerClusterGroup();
+
+for (var i = 0; i < businesslocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ businesslocations[i][1]+ '">'+businesslocations[i][0]+'</a></dt>'+'<dd>'+businesslocations[i][5]+'</dd></dl>'
+    businessmarker = new L.marker([businesslocations[i][2], businesslocations[i][3]])
+    .bindPopup(popupText);
+    businessmarkers.addLayer(businessmarker);
 };
 
 
@@ -154,23 +246,106 @@ for (var i = 0; i < housinglocations.length; i++) {
 
 map.addLayer(allmarkers);
 
-$("#all").click(function() {
+        $("#all").click(function() {
              map.addLayer(allmarkers)
-             map.removeLayer(housingmarkers)
              map.removeLayer(workermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(businessmarkers)
          });
          $("#worker").click(function() {
             map.addLayer(workermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
              map.removeLayer(housingmarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(businessmarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#consumer").click(function() {
+            map.addLayer(consumermarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(businessmarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#producer").click(function() {
+            map.addLayer(producermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(businessmarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#other").click(function() {
+            map.addLayer(othermarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(businessmarkers)
              map.removeLayer(allmarkers)
          });
          $("#housing").click(function() {
             map.addLayer(housingmarkers)
-             map.removeLayer(allmarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
              map.removeLayer(workermarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(businessmarkers)
+             map.removeLayer(allmarkers)
          });
-
-
+         $("#secondary").click(function() {
+            map.addLayer(secondarymarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(businessmarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#land").click(function() {
+            map.addLayer(landmarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(businessmarkers)
+             map.removeLayer(allmarkers)
+         });
+         $("#business").click(function() {
+            map.addLayer(businessmarkers)
+             map.removeLayer(consumermarkers)
+             map.removeLayer(producermarkers)
+             map.removeLayer(othermarkers)
+             map.removeLayer(housingmarkers)
+             map.removeLayer(secondarymarkers)
+             map.removeLayer(landmarkers)
+             map.removeLayer(workermarkers)
+             map.removeLayer(allmarkers)
+         });
+ 
 
 }
 
