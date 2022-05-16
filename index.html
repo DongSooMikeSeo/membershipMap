@@ -122,7 +122,7 @@ for (var i = 0; i < alllocations.length; i++) {
 // worker location
 
 const workerlocations = json.filter( x =>x.coopType =="Worker").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let workermarkers = L.markerClusterGroup();
@@ -137,7 +137,7 @@ for (var i = 0; i < workerlocations.length; i++) {
 //Consumer location
 
 const consumerlocations = json.filter( x =>x.coopType =="Consumer").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let consumermarkers = L.markerClusterGroup();
@@ -152,7 +152,7 @@ for (var i = 0; i < consumerlocations.length; i++) {
 //Producer location
 
 const producerlocations = json.filter( x =>x.coopType =="Producer").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let producermarkers = L.markerClusterGroup();
@@ -167,7 +167,7 @@ for (var i = 0; i < producerlocations.length; i++) {
 //Other location
 
 const otherlocations = json.filter( x =>x.coopType =="Other").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let othermarkers = L.markerClusterGroup();
@@ -184,7 +184,7 @@ for (var i = 0; i < otherlocations.length; i++) {
 //housing location
 
 const housinglocations = json.filter( x =>x.coopType =="Housing").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let housingmarkers = L.markerClusterGroup();
@@ -199,7 +199,7 @@ for (var i = 0; i < housinglocations.length; i++) {
 //Secondary location
 
 const secondarylocations = json.filter( x =>x.coopType =="Secondary").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let secondarymarkers = L.markerClusterGroup();
@@ -214,7 +214,7 @@ for (var i = 0; i < secondarylocations.length; i++) {
 //Land location
 
 const landlocations = json.filter( x =>x.coopType =="Land").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let landmarkers = L.markerClusterGroup();
@@ -229,7 +229,7 @@ for (var i = 0; i < landlocations.length; i++) {
 //Business location
 
 const businesslocations = json.filter( x =>x.coopType =="Business").map((row) => {
-        return [row.Name, row.Link, row.X, row.Y,row.coopType];
+        return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
     let businessmarkers = L.markerClusterGroup();
