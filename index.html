@@ -72,7 +72,7 @@
         <button type="button" id="housing" class="btn btn-info">Housing Coop</button>
         <button type="button" id="federation" class="btn btn-info">Federation Coop</button>
         <button type="button" id="land" class="btn btn-info">Land Coop</button>
-        <button type="button" id="business" class="btn btn-info">Business Coop</button>
+        <button type="button" id="multiStake" class="btn btn-info">Multi-Stake Holder</button>
     </div>
 
     <div id="map" style="height: 100vh; width: 100%;"> </div>
@@ -146,7 +146,10 @@ async function main (){
     const json = await response.json();
 
     // all location
-    const alllocations = json.map((row) => {
+    const alllocations = json.filter((thing, index, self) =>
+  index === self.findIndex((t) => (
+    t.Name === thing.Name 
+  ))).map((row) => {
         return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
@@ -266,19 +269,19 @@ for (var i = 0; i < landlocations.length; i++) {
     landmarkers.addLayer(landmarker);
 };
 
-//Business location
+//multiStake location
 
-const businesslocations = json.filter( x =>x.coopType =="Business").map((row) => {
+const multiStakelocations = json.filter( x =>x.Multi =="Yes").map((row) => {
         return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
-    let businessmarkers = L.markerClusterGroup();
+    let multiStakemarkers = L.markerClusterGroup();
 
-for (var i = 0; i < businesslocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ businesslocations[i][1]+ '">'+businesslocations[i][0]+'</a></dt>'+'<dd>'+businesslocations[i][5]+'</dd></dl>'
-    businessmarker = new L.marker([businesslocations[i][2], businesslocations[i][3]])
+for (var i = 0; i < multiStakelocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ multiStakelocations[i][1]+ '">'+multiStakelocations[i][0]+'</a></dt>'+'<dd>'+multiStakelocations[i][5]+'</dd></dl>'
+    multiStakemarker = new L.marker([multiStakelocations[i][2], multiStakelocations[i][3]])
     .bindPopup(popupText);
-    businessmarkers.addLayer(businessmarker);
+    multiStakemarkers.addLayer(multiStakemarker);
 };
 
 
@@ -295,7 +298,7 @@ map.addLayer(allmarkers);
              map.removeLayer(housingmarkers)
              map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
          });
          $("#worker").click(function() {
             map.addLayer(workermarkers)
@@ -305,7 +308,7 @@ map.addLayer(allmarkers);
              map.removeLayer(housingmarkers)
              map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
              map.removeLayer(allmarkers)
          });
          $("#consumer").click(function() {
@@ -316,7 +319,7 @@ map.addLayer(allmarkers);
              map.removeLayer(housingmarkers)
              map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
              map.removeLayer(allmarkers)
          });
          $("#producer").click(function() {
@@ -327,7 +330,7 @@ map.addLayer(allmarkers);
              map.removeLayer(housingmarkers)
              map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
              map.removeLayer(allmarkers)
          });
          $("#other").click(function() {
@@ -338,7 +341,7 @@ map.addLayer(allmarkers);
              map.removeLayer(housingmarkers)
              map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
              map.removeLayer(allmarkers)
          });
          $("#housing").click(function() {
@@ -349,7 +352,7 @@ map.addLayer(allmarkers);
              map.removeLayer(workermarkers)
              map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
              map.removeLayer(allmarkers)
          });
          $("#federation").click(function() {
@@ -360,7 +363,7 @@ map.addLayer(allmarkers);
              map.removeLayer(housingmarkers)
              map.removeLayer(workermarkers)
              map.removeLayer(landmarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
              map.removeLayer(allmarkers)
          });
          $("#land").click(function() {
@@ -371,11 +374,11 @@ map.addLayer(allmarkers);
              map.removeLayer(housingmarkers)
              map.removeLayer(federationmarkers)
              map.removeLayer(workermarkers)
-             map.removeLayer(businessmarkers)
+             map.removeLayer(multiStakemarkers)
              map.removeLayer(allmarkers)
          });
-         $("#business").click(function() {
-            map.addLayer(businessmarkers)
+         $("#multiStake").click(function() {
+            map.addLayer(multiStakemarkers)
              map.removeLayer(consumermarkers)
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
