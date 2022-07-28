@@ -70,7 +70,7 @@
         <button type="button" id="producer" class="btn btn-info">Producer Coop</button>
         <button type="button" id="other" class="btn btn-info">Other Coop</button>
         <button type="button" id="housing" class="btn btn-info">Housing Coop</button>
-        <button type="button" id="secondary" class="btn btn-info">Secondary Coop</button>
+        <button type="button" id="federation" class="btn btn-info">Federation Coop</button>
         <button type="button" id="land" class="btn btn-info">Land Coop</button>
         <button type="button" id="business" class="btn btn-info">Business Coop</button>
     </div>
@@ -236,19 +236,19 @@ for (var i = 0; i < housinglocations.length; i++) {
     housingmarkers.addLayer(housingmarker);
 };
 
-//Secondary location
+//Federation location
 
-const secondarylocations = json.filter( x =>x.coopType =="Secondary").map((row) => {
+const federationlocations = json.filter( x =>x.coopType =="Federation").map((row) => {
         return [row.Name, row.Link, row.X, row.Y,row.coopType, row.Description];
     });
 
-    let secondarymarkers = L.markerClusterGroup();
+    let federationmarkers = L.markerClusterGroup();
 
-for (var i = 0; i < secondarylocations.length; i++) {
-    popupText = '<dl><dt><a href="'+ secondarylocations[i][1]+ '">'+secondarylocations[i][0]+'</a></dt>'+'<dd>'+secondarylocations[i][5]+'</dd></dl>'
-    secondarymarker = new L.marker([secondarylocations[i][2], secondarylocations[i][3]])
+for (var i = 0; i < federationlocations.length; i++) {
+    popupText = '<dl><dt><a href="'+ federationlocations[i][1]+ '">'+federationlocations[i][0]+'</a></dt>'+'<dd>'+federationlocations[i][5]+'</dd></dl>'
+    federationmarker = new L.marker([federationlocations[i][2], federationlocations[i][3]])
     .bindPopup(popupText);
-    secondarymarkers.addLayer(secondarymarker);
+    federationmarkers.addLayer(federationmarker);
 };
 
 //Land location
@@ -293,7 +293,7 @@ map.addLayer(allmarkers);
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
              map.removeLayer(housingmarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
              map.removeLayer(businessmarkers)
          });
@@ -303,7 +303,7 @@ map.addLayer(allmarkers);
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
              map.removeLayer(housingmarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
              map.removeLayer(businessmarkers)
              map.removeLayer(allmarkers)
@@ -314,7 +314,7 @@ map.addLayer(allmarkers);
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
              map.removeLayer(housingmarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
              map.removeLayer(businessmarkers)
              map.removeLayer(allmarkers)
@@ -325,7 +325,7 @@ map.addLayer(allmarkers);
              map.removeLayer(workermarkers)
              map.removeLayer(othermarkers)
              map.removeLayer(housingmarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
              map.removeLayer(businessmarkers)
              map.removeLayer(allmarkers)
@@ -336,7 +336,7 @@ map.addLayer(allmarkers);
              map.removeLayer(producermarkers)
              map.removeLayer(workermarkers)
              map.removeLayer(housingmarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
              map.removeLayer(businessmarkers)
              map.removeLayer(allmarkers)
@@ -347,13 +347,13 @@ map.addLayer(allmarkers);
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
              map.removeLayer(workermarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
              map.removeLayer(businessmarkers)
              map.removeLayer(allmarkers)
          });
-         $("#secondary").click(function() {
-            map.addLayer(secondarymarkers)
+         $("#federation").click(function() {
+            map.addLayer(federationmarkers)
              map.removeLayer(consumermarkers)
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
@@ -369,7 +369,7 @@ map.addLayer(allmarkers);
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
              map.removeLayer(housingmarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(workermarkers)
              map.removeLayer(businessmarkers)
              map.removeLayer(allmarkers)
@@ -380,7 +380,7 @@ map.addLayer(allmarkers);
              map.removeLayer(producermarkers)
              map.removeLayer(othermarkers)
              map.removeLayer(housingmarkers)
-             map.removeLayer(secondarymarkers)
+             map.removeLayer(federationmarkers)
              map.removeLayer(landmarkers)
              map.removeLayer(workermarkers)
              map.removeLayer(allmarkers)
